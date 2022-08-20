@@ -25,7 +25,7 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("titulo", titulo);
         model.addAttribute("nombreProyecto", nombreProyecto);
-        model.addAttribute("servicio", generadorService.servicio());
+        model.addAttribute("prueba", generadorService.mostrarSoluciones());
         return "index";
     }
 }

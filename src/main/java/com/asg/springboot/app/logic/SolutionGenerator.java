@@ -1,9 +1,6 @@
 package com.asg.springboot.app.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class SolutionGenerator {
@@ -156,17 +153,17 @@ public class SolutionGenerator {
             System.arraycopy(bloquesObligatorios.toArray(), 0, keyBlocks, 0, bloquesObligatorios.size());
         }
         int[] keyBlocksReps = SolutionGeneratorRules.leastOneKeyBlock(keyBlocks, combinacion);
+        boolean minKeyBlock = false;
         for (int reps : keyBlocksReps) {
-            if (reps < 1) {
-                return false;
+            if (reps > 1) {
+                minKeyBlock = true;
             }
         }
-        int prevSize = combinacion.size();
-        SolutionGeneratorRules.simplifyTurns(combinacion);
-        if (combinacion.size() != prevSize) {
-            return false;
-        }
-        if (!SolutionGeneratorRules.lastBlock(combinacion)) {
+        if(!minKeyBlock) return false;
+
+        if (!SolutionGeneratorRules.simplifyTurnsV2(combinacion)
+                || !SolutionGeneratorRules.oppositeBlocksTogether(combinacion)
+                || !SolutionGeneratorRules.lastBlock(combinacion)) {
             return false;
         }
         return true;
@@ -235,7 +232,7 @@ public class SolutionGenerator {
         int index = 0;
         for (int i = 0; i < newDefaultBlocks.size(); i++) {
             for (int x = 0; x < subsetDefaultBlocks[i]; x++) {
-                permutationArray[index] = defaultBlocks.get(i);
+                permutationArray[index] = newDefaultBlocks.get(i);
                 index++;
             }
         }
@@ -272,7 +269,11 @@ public class SolutionGenerator {
             for (int i = 0; i < r; i++){
                 solucion[i] = permutationArray[permutacion[i]];
             }
-            solucionesPosibles.add(solucion);
+            ArrayList<String> arrayListSolucion = new ArrayList<>();
+            Collections.addAll(arrayListSolucion, solucion);
+            if(isCandidate(arrayListSolucion, null)){
+                solucionesPosibles.add(solucion);
+            }
         }
         return solucionesPosibles;
     }
