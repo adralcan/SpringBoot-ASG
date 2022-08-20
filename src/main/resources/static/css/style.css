@@ -1,0 +1,6 @@
+.grid-container {
+    position: relative;
+    background-color: aliceblue;
+    height: 768px;
+    overflow-y: scroll;
+}

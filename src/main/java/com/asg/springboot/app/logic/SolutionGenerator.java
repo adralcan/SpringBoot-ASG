@@ -1,4 +1,4 @@
-package logic;
+package com.asg.springboot.app.logic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
