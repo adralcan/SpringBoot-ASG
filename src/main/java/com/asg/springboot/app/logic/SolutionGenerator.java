@@ -163,7 +163,8 @@ public class SolutionGenerator {
 
         if (!SolutionGeneratorRules.simplifyTurnsV2(combinacion)
                 || !SolutionGeneratorRules.oppositeBlocksTogether(combinacion)
-                || !SolutionGeneratorRules.lastBlock(combinacion)) {
+                || !SolutionGeneratorRules.lastBlock(combinacion)
+                || !SolutionGeneratorRules.actionBlock(combinacion)) {
             return false;
         }
         return true;
