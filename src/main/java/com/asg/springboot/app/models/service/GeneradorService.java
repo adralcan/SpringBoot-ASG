@@ -11,12 +11,15 @@ import java.util.Collections;
 public class GeneradorService {
 
     SolutionGenerator solutionGenerator = new SolutionGenerator();
+
+    public ArrayList<String []> soluciones;
+
     public String servicio() {
         String ejemplo = "ejecutando algun proceso importante...";
         return ejemplo;
     }
 
-    public String mostrarSoluciones() {
+    public ArrayList<String []> mostrarSoluciones() {
         ArrayList<String> defaultBlocks = new ArrayList<>();
         String[] bloques = {"advance","backwards","turnRight","turnLeft","action"};
         Collections.addAll(defaultBlocks, bloques);
@@ -28,6 +31,13 @@ public class GeneradorService {
         for (int i = 0; i < soluciones.size(); i++){
             System.out.println("Solucion " + i + ": " + Arrays.toString(soluciones.get(i)));
         }
-        return "prueba";
+        return soluciones;
+    }
+    public ArrayList<String []> mostrarSoluciones(ArrayList<String> defaultBlocks, int solutionSize,  ArrayList<String> mandatoryBlocks) {
+        ArrayList<String []> soluciones = solutionGenerator.solutionGeneratorDP(defaultBlocks, solutionSize, mandatoryBlocks);
+        for (int i = 0; i < soluciones.size(); i++){
+            System.out.println("Solucion " + i + ": " + Arrays.toString(soluciones.get(i)));
+        }
+        return soluciones;
     }
 }

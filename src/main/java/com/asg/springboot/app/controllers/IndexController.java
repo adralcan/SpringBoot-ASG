@@ -3,9 +3,16 @@ package com.asg.springboot.app.controllers;
 import com.asg.springboot.app.models.service.GeneradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -26,7 +33,18 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("titulo", titulo);
         model.addAttribute("nombreProyecto", nombreProyecto);
-        model.addAttribute("prueba", generadorService.mostrarSoluciones());
+        if(generadorService.soluciones != null) {
+            model.addAttribute("solucionesList", generadorService.soluciones);
+        }
         return "index";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/generateSolutions", method = RequestMethod.POST)
+    public ResponseEntity<String> generateSolutions(Principal principal, Model model, @RequestParam("defaultBlocks") ArrayList<String> defaultBlocks,
+                                            @RequestParam("solutionSize") int solutionSize, @RequestParam("mandatoryBlocks") ArrayList<String> mandatoryBlocks) {
+        ArrayList<String[]> solucionesList = generadorService.mostrarSoluciones(defaultBlocks, solutionSize, mandatoryBlocks);
+        generadorService.soluciones = solucionesList;
+        return new ResponseEntity<>("Cargando solcuiones", HttpStatus.OK);
     }
 }
