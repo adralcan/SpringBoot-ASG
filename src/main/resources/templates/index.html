@@ -21,6 +21,18 @@
         <div class="row">
             <div class="col-md-4">
                 Instrucciones por defecto:
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        jump
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        advance
+                    </label>
+                </div>
             </div>
             <div class="col-md-4">
                 Número de instrucciones por solución:
@@ -37,7 +49,7 @@
     </div>
 </div>
 <div class="row grid-container">
-    <div class="col-md-4 .col-lg-4 mx-auto">
+    <div class="col-md-4 .col-lg-4 mx-auto solutionList">
         <ul th:each="solucion, solucionStat : ${solucionesList}"
             th:class="(${solucionStat.odd}? 'odd') + ' list-group list-group-horizontal'">
             <li th:text="${solucionStat.count}" class="list-group-item"></li>
@@ -48,6 +60,13 @@
 <script th:inline="javascript">
     $(document).ready(function () {
         $("#generateSoluciones").click(function () {
+            $('.solutionList').append('<div class="spinner-border" role="status" style="\n' +
+                '    width: 60vh;\n' +
+                '    height: 60vh;\n' +
+                '">\n' +
+                '  <span class="visually-hidden">Loading...</span>\n' +
+                '</div>');
+            debugger;
             Generador.generateSolutions();
         });
     });
