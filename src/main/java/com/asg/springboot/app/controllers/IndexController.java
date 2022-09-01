@@ -13,7 +13,8 @@ public class IndexController {
     // De momento esto se deja asi. No es escalable esta muy acomplado
     // En un futuro si hubiera otros generadores implementaría una interfaz generador y
     // aplicaría inyección de dependencias entre los distintos tipos de generadores.
-    private GeneradorService generadorService  =new GeneradorService();
+    @Autowired
+    GeneradorService generadorService;
 
     @Value("${texto.com.asg.springboot.app.titulo}")
     private String titulo;

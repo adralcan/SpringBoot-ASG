@@ -8,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="row">
+    <h1 class="col-md-12 centerText" th:text="${nombreProyecto}"></h1>
+</div>
 <div class="row grid-container">
     <div class="col-md-12">
         <div class="row">
@@ -23,7 +26,6 @@
         </div>
     </div>
 </div>
-<h1 th:text="${nombreProyecto}"></h1>
 <div th:text="${servicio}"></div>
 </body>
 </html>

@@ -1,11 +1,13 @@
 package com.asg.springboot.app.models.service;
 
 import com.asg.springboot.app.logic.SolutionGenerator;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+@Service
 public class GeneradorService {
 
     SolutionGenerator solutionGenerator = new SolutionGenerator();

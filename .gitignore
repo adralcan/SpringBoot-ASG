@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+/node_modules/
+/src/main/webapp/resources/scripts/wro/
+/package.json
+/package-lock.json
