@@ -18,10 +18,10 @@ public class GeneradorService {
 
     public String mostrarSoluciones() {
         ArrayList<String> defaultBlocks = new ArrayList<>();
-        String[] bloques = {"advance", "turnRight", "turnLeft", "backwards"};
+        String[] bloques = {"advance","backwards","turnRight","turnLeft","action"};
         Collections.addAll(defaultBlocks, bloques);
         ArrayList<String> extraBlocks = new ArrayList<>();
-        String[] bloquesObligatorios = {"advance", "advance", "advance", "turnLeft", "turnRight"};
+        String[] bloquesObligatorios = {"advance", "advance", "advance", "turnRight", "jump", "backwards"};
         Collections.addAll(extraBlocks, bloquesObligatorios);
         ArrayList<String []> soluciones = solutionGenerator.solutionGeneratorDP(defaultBlocks, 7, extraBlocks);
 

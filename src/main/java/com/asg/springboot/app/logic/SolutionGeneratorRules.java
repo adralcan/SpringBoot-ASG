@@ -63,7 +63,7 @@ public class SolutionGeneratorRules {
                     .boxed().collect(Collectors.toSet()));
             if (indices.size() >= 3) {
                 for (int i = 2; i < indices.size(); i++) {
-                    if (indices.get(i) - 2 == indices.get(i - 2) && indices.get(i) - 1 == indices.get(i - 1)){
+                    if ((indices.get(i) - 1) == indices.get(i - 1)){
                         return false;
                     }
                 }
@@ -100,5 +100,17 @@ public class SolutionGeneratorRules {
         return candidateSolution.get(candidateSolution.size() - 1).equals("advance") ||
                 candidateSolution.get(candidateSolution.size() - 1).equals("backwards");
     }
+
+    static boolean actionBlock(ArrayList<String> candidateSolution) {
+        return !candidateSolution.get(0).equals("action") &&
+                !candidateSolution.get(candidateSolution.size() - 2).equals("action");
+    }
+
+    //TODO: bloque accion entre giros
+    // Ej: turnLeft, action, turnRight Ej: turnLeft, action, action, turnRight Ej: [turnLeft, action,
+    // Tiene que haber siempre un advance despues del segundo action
+
+    //TODO: Cuando esten las reglas del generador de mapas, para aprovechar soluciones que por si solas no tienen sentido:
+    // como Ej: backwards, jump, se utilizaran teletransportes si se puede, antes de los jumps
 }
 
