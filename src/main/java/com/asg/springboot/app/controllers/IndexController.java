@@ -42,7 +42,8 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "/generateSolutions", method = RequestMethod.POST)
     public ResponseEntity<String> generateSolutions(Principal principal, Model model, @RequestParam("defaultBlocks") ArrayList<String> defaultBlocks,
-                                            @RequestParam("solutionSize") int solutionSize, @RequestParam("mandatoryBlocks") ArrayList<String> mandatoryBlocks) {
+                                            @RequestParam("solutionSize") int solutionSize, @RequestParam(value = "mandatoryBlocks", defaultValue = "") ArrayList<String> mandatoryBlocks) {
+        generadorService.soluciones = new ArrayList<>();
         ArrayList<String[]> solucionesList = generadorService.mostrarSoluciones(defaultBlocks, solutionSize, mandatoryBlocks);
         generadorService.soluciones = solucionesList;
         return new ResponseEntity<>("Cargando solcuiones", HttpStatus.OK);

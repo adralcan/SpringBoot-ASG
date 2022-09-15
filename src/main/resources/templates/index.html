@@ -9,36 +9,85 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script th:src="@{/resources/scripts/wro/index.js}"></script>
 </head>
 <body>
 <div class="row">
     <h1 class="col-md-6 mx-auto" th:text="${nombreProyecto}"></h1>
 </div>
-<div class="row params">
+<div class="row params" style="margin: auto">
     <div class="col-md-12">
-        <div class="row">
+        <div class="row input-group mb-3">
             <div class="col-md-4">
                 Instrucciones por defecto:
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        jump
+                    <input class="form-check-input" type="checkbox" value="" id="advanceCheck" checked>
+                    <label class="form-check-label" for="advanceCheck">
+                        advance
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        advance
+                    <input class="form-check-input" type="checkbox" value="" id="backwardsCheck">
+                    <label class="form-check-label" for="backwardsCheck">
+                        backwards
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="turnLeftCheck">
+                    <label class="form-check-label" for="turnLeftCheck">
+                        turnLeft
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="turnRightCheck">
+                    <label class="form-check-label" for="turnRightCheck">
+                        turnRight
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="actionCheck">
+                    <label class="form-check-label" for="actionCheck">
+                        action
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="jumpCheck">
+                    <label class="form-check-label" for="jumpCheck">
+                        jump
                     </label>
                 </div>
             </div>
             <div class="col-md-4">
                 Número de instrucciones por solución:
+                <input type="number" id="instructionNumber" name="instructionNumber"
+                       min="3" max="12" value="6">
             </div>
             <div class="col-md-4">
                 Instrucciones obligatorias en la solución:
+                <div class="btn-group-vertical me-2" role="group" aria-label="First group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">advance</span>
+                        <input type="number" id="advanceNumber" name="advanceNumber"
+                               min="0" max="12" value="0">
+                        <span class="input-group-text" id="basic-addon2">backwards</span>
+                        <input type="number" id="backwardsNumber" name="backwardsNumber"
+                               min="0" max="12" value="0">
+                        <span class="input-group-text">turnRight</span>
+                        <input type="number" id="turnRightNumber" name="turnRightNumber"
+                               min="0" max="12" value="0">
+                        <span class="input-group-text">turnLeft</span>
+                        <input type="number" id="turnLeftNumber" name="turnLeftNumber"
+                               min="0" max="12" value="0">
+                        <span class="input-group-text">action</span>
+                        <input type="number" id="actionNumber" name="actionNumber"
+                               min="0" max="12" value="0">
+                        <span class="input-group-text">jump</span>
+                        <input type="number" id="jumpNumber" name="jumpNumber"
+                               min="0" max="12" value="0">
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
@@ -48,7 +97,7 @@
         <button type="button" class="btn btn-md btn-primary" id="generateSoluciones"> Generate</button>
     </div>
 </div>
-<div class="row grid-container">
+<div class="row grid-container" style="margin: auto">
     <div class="col-md-4 .col-lg-4 mx-auto solutionList">
         <ul th:each="solucion, solucionStat : ${solucionesList}"
             th:class="(${solucionStat.odd}? 'odd') + ' list-group list-group-horizontal'">
@@ -66,7 +115,6 @@
                 '">\n' +
                 '  <span class="visually-hidden">Loading...</span>\n' +
                 '</div>');
-            debugger;
             Generador.generateSolutions();
         });
     });
